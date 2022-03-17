@@ -69,7 +69,10 @@ class DataVisualization(object):
 
 def main():
     ins = DataVisualization()
-    ins.read_csv('test2.csv')
+    #file_path = sys.argv[1]
+    file_path = "test2.csv"
+    #print(file_path)
+    ins.read_csv(file_path)
 
     target_first_index = ins.extract_target_index('D410')
     ins.drop_df(0, target_first_index)
