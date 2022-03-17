@@ -1,6 +1,6 @@
 import math
 
-graph_config = {
+plc_graph_config = {
     'graph1' : {
         'axis-len' : 2,
         'title' : 'x-axis position & current value',
@@ -164,3 +164,54 @@ graph_config = {
 	'y1_lim_max' : 100,
     },
 }
+
+vibration_graph_config = {
+    'graph1' : {
+        'axis-len' : 1,
+        'title' : 'X-axis accleration',
+	'x_label' : 'Time[s]',
+	'y1_label' : 'X-axis[G]',
+	'fontsize' : 14,
+	'x_index' : 'time',
+	'y1_index' : ['accel_x'],
+	'y1_legend' : ['acceleration'],
+	'y1_plot_color' : ['red'],
+	'x_lim_min' : 0,
+	'x_lim_max' : lambda x : math.ceil(max(x)),
+	'y1_lim_min' : -3,
+	'y1_lim_max' : 3,
+    },
+    'graph2' : {
+        'axis-len' : 1,
+        'title' : 'Y-axis accleration',
+	'x_label' : 'Time[s]',
+	'y1_label' : 'Y-axis[G]',
+	'fontsize' : 14,
+	'x_index' : 'time',
+	'y1_index' : ['accel_y'],
+	'y1_legend' : ['acceleration'],
+	'y1_plot_color' : ['green'],
+	'x_lim_min' : 0,
+	'x_lim_max' : lambda x : math.ceil(max(x)),
+	'y1_lim_min' : -3,
+	'y1_lim_max' : 3,
+    },
+    'graph3' : {
+        'axis-len' : 1,
+        'title' : 'Z-axis accleration',
+	'x_label' : 'Time[s]',
+	'y1_label' : 'Z-axis[G]',
+	'fontsize' : 14,
+	'x_index' : 'time',
+	'y1_index' : ['accel_z'],
+	'y1_legend' : ['acceleration'],
+	'y1_plot_color' : ['blue'],
+	'x_lim_min' : 0,
+	'x_lim_max' : lambda x : math.ceil(max(x)),
+	'y1_lim_min' : -3,
+	'y1_lim_max' : 3,
+    },
+}
+
+
+

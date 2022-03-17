@@ -70,7 +70,7 @@ class DataVisualization(object):
 def main():
     ins = DataVisualization()
     #file_path = sys.argv[1]
-    file_path = "test2.csv"
+    file_path = "sample_plc_data.csv"
     #print(file_path)
     ins.read_csv(file_path)
 
@@ -95,10 +95,10 @@ def main():
     ins.update('D316', lambda x: x / 100000)
     ins.update('D322', lambda x: x / 10)
 
-    ins.set_graph_config(config.graph_config)
+    ins.set_graph_config(config.plc_graph_config)
 
     plt.subplots_adjust(wspace=0.5, hspace=0.4)
-    plt.savefig("result.png", facecolor="azure", bbox_inches='tight', pad_inches=0)
+    plt.savefig("result.png", facecolor="azure", bbox_inches='tight', pad_inches=0.1)
     plt.show()
 
 if __name__ == '__main__':
