@@ -38,9 +38,15 @@ class DataVisualization(object):
     def update(self, i, f):
         self.df[i] = list(map(f, self.df[i]))
 
+    def set_text(self):
+        ax = self.fig.add_subplot(3, 3, 1)
+        ax.set_axis_off()
+        ax.text(0, 0.2, 'cycle count: ' + str(self.df['D410'][0]), fontsize=14)
+        ax.text(0, 0.4, 'datetime: ' + str(self.df['TIME'][0]), fontsize=14)
+
     def set_graph_config(self, c):
         for i, x in enumerate(c):
-            ax1 = self.fig.add_subplot(3, 3, i+1)
+            ax1 = self.fig.add_subplot(3, 3, i+2)
 
             config = c[x]
             ax1.set_title(config['title'], fontsize=config['fontsize'])
@@ -69,8 +75,10 @@ class DataVisualization(object):
 
 def main():
     ins = DataVisualization()
-    #file_path = sys.argv[1]
-    file_path = "sample_plc_data.csv"
+    file_path = sys.argv[1]
+    dir_name = os.path.dirname(file_path)
+    file_name = os.path.basename(file_path)
+    #file_path = "sample_plc_data.csv"
     #print(file_path)
     ins.read_csv(file_path)
 
@@ -95,10 +103,11 @@ def main():
     ins.update('D316', lambda x: x / 100000)
     ins.update('D322', lambda x: x / 10)
 
+    ins.set_text()
     ins.set_graph_config(config.plc_graph_config)
 
     plt.subplots_adjust(wspace=0.5, hspace=0.4)
-    plt.savefig("result.png", facecolor="azure", bbox_inches='tight', pad_inches=0.1)
+    plt.savefig(dir_name + "/PLC_log.png", facecolor="azure", bbox_inches='tight', pad_inches=0.1)
     plt.show()
 
 if __name__ == '__main__':

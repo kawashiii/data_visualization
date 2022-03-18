@@ -78,6 +78,11 @@ TEMP_SCALE = 0.1
 HUMIDITY_SCALE = 0.1
 
 def create_csv_file(file_path):
+    file_name = os.path.basename(file_path)
+    dir_name = os.path.dirname(file_path)
+
+    save_file_path = dir_name + '/' + file_name.split('.')[0] + '.csv'
+
     with open(file_path, 'rb') as f:
         count = 0
         output = ['datetime,time,seq_no,sys_clock,accel_x,accel_y,accel_z,gyro_x,gyro_y,temperature,humidity\n']
@@ -105,22 +110,26 @@ def create_csv_file(file_path):
 
                 count += 1
 
-        with open('sample_vibration_data.csv', 'w') as output_file:
+        with open(save_file_path, 'w') as output_file:
             for i in range(len(output)):
                 output_file.write(output[i])
 
+    return save_file_path
+
 def main():
-    #file_path = sys.argv[1]
-    file_path = 'sample_vibration_data.dat'
-    create_csv_file(file_path)
+    file_path = sys.argv[1]
+    #file_path = 'sample_vibration_data.dat'
+    file_name = os.path.basename(file_path)
+    dir_name = os.path.dirname(file_path)
+    file_path = create_csv_file(file_path)
 
     ins = DataVisualization()
-    file_path = 'sample_vibration_data.csv'
+    #file_path = 'sample_vibration_data.csv'
     ins.read_csv(file_path)
 
     ins.set_graph_config(config.vibration_graph_config)
     plt.subplots_adjust(wspace=0.5, hspace=0.4)
-    plt.savefig("result.png", facecolor="azure", bbox_inches='tight', pad_inches=0.1)
+    plt.savefig(dir_name + "/Vibration_log.png", facecolor="azure", bbox_inches='tight', pad_inches=0.1)
     plt.show()         
 
 if __name__ == '__main__':
